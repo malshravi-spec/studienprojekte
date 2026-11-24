@@ -1,0 +1,43 @@
+--------------------------------------------------------
+--  Datei erstellt -Mittwoch-Mai-26-2021   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table BENUTZER
+--------------------------------------------------------
+
+  CREATE TABLE "BENUTZER" 
+   (	"USER_ID" NUMBER(*,0), 
+	"ANFRAGE_ID" NUMBER(*,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DBS_STUDENT" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C00162547
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C00162547" ON "BENUTZER" ("USER_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DBS_STUDENT" ;
+--------------------------------------------------------
+--  Constraints for Table BENUTZER
+--------------------------------------------------------
+
+  ALTER TABLE "BENUTZER" ADD PRIMARY KEY ("USER_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DBS_STUDENT"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table BENUTZER
+--------------------------------------------------------
+
+  ALTER TABLE "BENUTZER" ADD FOREIGN KEY ("ANFRAGE_ID")
+	  REFERENCES "ANFRAGE" ("ANFRAGE_ID") ON DELETE SET NULL ENABLE;

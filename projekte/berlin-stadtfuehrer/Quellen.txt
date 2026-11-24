@@ -1,0 +1,4 @@
+Quellen, die für den Javascript verwendet wurden:
+https://www.youtube.com/watch?v=3ls013DBcww
+https://stackoverflow.com/questions/13840516/how-to-find-my-distance-to-a-known-location-in-javascript
+http://html5doctor.com/finding-your-position-with-geolocation/#:~:text=Geolocation%20sources&text=Mobile%20devices%20tend%20to%20use,IDs%20(accurate%20to%201000m)

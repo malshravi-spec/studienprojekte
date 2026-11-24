@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de" style="height: 100%">
+	<head>  
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8"> <!--Specifies the character encoding for the document.-->
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--A <meta> viewport element gives the browser instructions on how to control the page's dimensions and scaling. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.-->
+	  <link rel="stylesheet" href="style.css" type="text/css">
+	  <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+     <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+      
+	    
+		<script>
+		function maps() {
+			if ('geolocation' in navigator){
+				console.log('geolocation available');
+				navigator.geolocation.getCurrentPosition(position => {
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+					const acc = position.coords.accuracy;
+					const mymap = L.map('mymap').setView([lat, lon], 15);
+					const attribution =
+					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+					const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+					const tiles = L.tileLayer(tileUrl, { attribution });
+					tiles.addTo(mymap);
+					const marker = L.marker([lat, lon]).addTo(mymap);
+				});
+				} else {
+					console.log('geolocation not available');
+				}
+		}
+		function latlon() {
+			if ('geolocation' in navigator){
+				console.log('geolocation available');
+				navigator.geolocation.getCurrentPosition(position => {
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+					document.getElementById('latitude').textContent = lat;
+					document.getElementById('longitude').textContent = lon;
+					
+				});
+				} else {
+					console.log('geolocation not available');
+				}
+		}
+		function acc() {
+			if ('geolocation' in navigator){
+				console.log('geolocation available');
+				navigator.geolocation.getCurrentPosition(position => {
+					const acc = position.coords.accuracy;
+					document.getElementById('accuracy').textContent = acc;
+				});
+				} else {
+					console.log('geolocation not available');
+				}
+		}
+		function dista() {
+			if ('geolocation' in navigator){
+				console.log('geolocation available');
+				navigator.geolocation.getCurrentPosition(position => {
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+					function distance(lon1, lat1, lon2, lat2) {
+					  var R = 6371; // Radius of the earth in km
+					  var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
+					  var dLon = (lon2-lon1).toRad(); 
+					  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+							  Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+							  Math.sin(dLon/2) * Math.sin(dLon/2); 
+					  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+					  var d = R * c; // Distance in km
+					  return d;
+					}
+
+					/** Converts numeric degrees to radians */
+					if (typeof(Number.prototype.toRad) === "undefined") {
+					  Number.prototype.toRad = function() {
+						return this * Math.PI / 180;
+					  }
+					}
+					dist = distance(lon, lat, 13.3518, 52.5452);
+					document.getElementById('distance').textContent = dist;
+				});
+				} else {
+					console.log('geolocation not available');
+				}
+		}
+		</script>
+
+
+
+
+	  <meta name="keywords" lang="de" content="Tourismus, Hotel, Restaurant, Sehenswürdigkeit, Freizeit"><!--informiert die suchmaschinen was die seite enthält-->
+	  <meta name="author" content="Mohammed Alshravi"><!--Specifies the name of the author of the document.-->
+	  <title>Touristenführer für Berlin</title>
+	</head>
+	<body> 
+		
+		<div class="maindiv""><!--Startseite-->
+		<div class="sidenav">
+			<a class="button" onclick="maps()" href="#">Standort anzeigen</a>
+			<a class="button" onclick="latlon()" href="#">Längen- und Breitengrad</a>
+			<a class="button" onclick="acc()" href="#">Genauigkeit</a>
+			<a class="button" onclick="dista()" href="#">Entfernung</a>
+		</div>
+		<nav>
+		<div class="mainnav"><!--Abschnitt für die navigation-->
+		<a class="button" href="main.html">
+		
+		Start 
+			 
+		</a>
+		<a class="button" href="sehenswurdigkeit.html">Sehenswürdigkeiten</a>
+		<a class="button" href="freizeit.html">Freizeit</a>
+		
+		<a class="button superactivated" href="entfernung.html">
+		<span class="strong">Entfernung zur Beuth-Hochschule</span>
+		</a>
+		</div>
+
+		</nav>
+		<div class="contentdiv">
+		<h1>Javascript</h1>
+		<p>
+			Breitengrad: <span id="latitude"></span>&deg;<br />
+			Längengrad: <span id="longitude"></span>&deg;<br />
+			Genauigkeit: auf <span id="accuracy"></span> m genau<br />
+			Entfernung zur Beuth-Hochschule: <span id="distance"></span> km<br />
+		</p>
+		<div id="mymap"></div>
+		
+		
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+		</div>
+		<div class="quicknav">
+		
+		
+		<div class="bottomsmalldist">&nbsp;</div>
+		<a class="button fixedwidthnext" href="main.html">
+		<div class="segmentbuttonnext"><div class="nextarrow">→ 
+		</div>
+		<div class="segment">Startseite</div>
+		</div>
+		</a>
+
+		</div>
+		
+
+		</div>
+
+
+	</body>
+</html>
